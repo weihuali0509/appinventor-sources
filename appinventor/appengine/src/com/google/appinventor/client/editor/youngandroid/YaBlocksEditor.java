@@ -115,7 +115,7 @@ public final class YaBlocksEditor extends FileEditor
     // This code seems to be using a rather old layout, so we cannot simply pass 100% for height.
     // Instead, it needs to be calculated from the client's window, and a listener added to Window
     // We use VIEWER_WINDOW_OFFSET as an approximation of the size of the top navigation bar
-    // New layouts don't need all this messing; see comments on selected answer at: 
+    // New layouts don't need all this messing; see comments on selected answer at:
     // http://stackoverflow.com/questions/86901/creating-a-fluid-panel-in-gwt-to-fill-the-page
     blocksArea.setHeight(Window.getClientHeight() - VIEWER_WINDOW_OFFSET + "px");
     Window.addResizeHandler(new ResizeHandler() {
@@ -212,7 +212,7 @@ public final class YaBlocksEditor extends FileEditor
       paletteBox.setContent(palettePanel);
     }
     PaletteBox.getPaletteBox().setVisible(false);
-    
+
     // Update the source structure explorer with the tree of this form's components.
     MockForm form = getForm();
     if (form != null) {
@@ -367,7 +367,7 @@ public final class YaBlocksEditor extends FileEditor
   public void addComponent(String typeName, String instanceName, String uuid) {
     if (componentUuids.add(uuid)) {
       String typeDescription = COMPONENT_DATABASE.getTypeDescription(typeName);
-      blocksArea.addComponent(typeDescription, instanceName, uuid);
+      blocksArea.addComponent(typeName, instanceName, uuid);
     }
   }
 
@@ -564,6 +564,14 @@ public final class YaBlocksEditor extends FileEditor
     if (editor != null) {
       editor.setDamaged(true);
     }
+  }
+
+  /*
+   * Switch language to the specified language if applicable
+   */
+  @Override
+  public void switchLanguage(String newLanguage) {
+    blocksArea.switchLanguage(newLanguage);
   }
 
 }

@@ -11,6 +11,8 @@ import com.google.gwt.i18n.client.Messages;
  * I18n strings for {@link Ode}.
  *
  */
+//@Generate(format = "com.google.gwt.i18n.rebind.format.PropertiesFormat")
+//@DefaultLocale("en_US")
 public interface OdeMessages extends Messages {
   // Used in multiple files
 
@@ -135,6 +137,27 @@ public interface OdeMessages extends Messages {
   @DefaultMessage("Blocks Editor is open")
   @Description("Label of the button for opening the blocks editor when the it is already open")
   String blocksEditorIsOpenButton();
+
+  // Switch Language Buttons
+  @DefaultMessage("Language")
+  @Description("Label of the button for switching language")
+  String switchLanguageButton();
+
+  @DefaultMessage("English")
+  @Description("Label of the button for switching language to English")
+  String switchLanguageEnglishButton();
+
+  @DefaultMessage("Chinese TW")
+  @Description("Label of the button for switching language to Chinese TW")
+  String switchLanguageChineseTWButton();
+
+  @DefaultMessage("German")
+  @Description("Label of the button for switching language to German")
+  String switchLanguageGermanButton();
+
+  @DefaultMessage("Vietnamese")
+  @Description("Label of the button for switching language to Vietnamese")
+  String switchLanguageVietnameseButton();
 
   // Used in MotdFetcher.java
 
@@ -1260,5 +1283,13 @@ public interface OdeMessages extends Messages {
   "<br /> The compiler error output was <br /> {0}.")
   @Description("Compilation error, with error message.")
   String unableToCompile(String errorMesssage);
+
+  @DefaultMessage("Any component")
+  @Description("Label on any-component branch of block selector tree")
+  String anyComponentLabel();
+
+  @DefaultMessage("Any ")
+  @Description("None")
+  String textAnyComponentLabel();
 
 }

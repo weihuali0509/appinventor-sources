@@ -68,7 +68,7 @@ Blockly.Language.text_join = {
   init : function() {
     this.setColour(Blockly.TEXT_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.OUTPUT));
-    this.appendValueInput('ADD0').appendTitle('join');
+    this.appendValueInput('ADD0').appendTitle(Blockly.LANG_TEXT_CREATE_JOIN_TITLE_JOIN);
     this.appendValueInput('ADD1');
     this.setTooltip(Blockly.LANG_TEXT_JOIN_TOOLTIP);
     this.setMutator(new Blockly.Mutator(['text_join_item']));
@@ -86,17 +86,17 @@ Blockly.Language.text_join = {
   saveConnections: Blockly.saveConnections,
   addEmptyInput: function(){
     this.appendDummyInput(this.emptyInputName)
-      .appendTitle('join');
+      .appendTitle(Blockly.LANG_TEXT_JOIN_TITLE_JOIN);
   },
   addInput: function(inputNum){
     var input = this.appendValueInput(this.repeatingInputName + inputNum).setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT));
     if(inputNum === 0){
-      input.appendTitle('join');
+      input.appendTitle(Blockly.LANG_TEXT_JOIN_TITLE_JOIN);
     }
     return input;
   },
   updateContainerBlock: function(containerBlock) {
-    containerBlock.inputList[0].titleRow[0].setText("join");
+    containerBlock.inputList[0].titleRow[0].setText(Blockly.LANG_TEXT_JOIN_TITLE_JOIN);
   },
   typeblock: [{ translatedName: Blockly.LANG_TEXT_JOIN_TITLE_JOIN }]
 
@@ -107,10 +107,10 @@ Blockly.Language.text_join_item = {
   init: function() {
     this.setColour(Blockly.TEXT_CATEGORY_HUE);
     this.appendDummyInput()
-        .appendTitle("string");
+        .appendTitle(Blockly.LANG_TEXT_JOIN_ITEM_TITLE_ITEM);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip("");
+    this.setTooltip(Blockly.LANG_TEXT_JOIN_ITEM_TOOLTIP);
     this.contextMenu = false;
   }
 };
@@ -124,9 +124,9 @@ Blockly.Language.text_length = {
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.OUTPUT));
     this.appendValueInput('VALUE')
       .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('length');
+      .appendTitle(Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH);
     this.setTooltip(Blockly.LANG_TEXT_LENGTH_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('length', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH }]
 };
@@ -138,11 +138,10 @@ Blockly.Language.text_isEmpty = {
   init : function() {
     this.setColour(Blockly.TEXT_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("boolean",Blockly.Language.OUTPUT));
-    this.appendValueInput('VALUE')
-      .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('is empty');
+    this.appendValueInput('VALUE').setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
+        .appendTitle(Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY);
     this.setTooltip(Blockly.LANG_TEXT_ISEMPTY_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('empty', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY }]
 };
@@ -154,19 +153,16 @@ Blockly.Language.text_compare = {
   init : function() {
     this.setColour(Blockly.TEXT_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("boolean",Blockly.Language.OUTPUT));
-    this.appendValueInput('TEXT1')
-      .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('compare texts');
-    this.appendValueInput('TEXT2')
-      .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+    this.appendValueInput('TEXT1').setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT)).appendTitle(Blockly.LANG_TEXT_COMPARE_INPUT_COMPARE);
+    this.appendValueInput('TEXT2').setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT)).appendTitle(
+        new Blockly.FieldDropdown(this.OPERATORS), 'OP');
     this.setInputsInline(true);
     var thisBlock = this;
     this.setTooltip(function() {
       var mode = thisBlock.getTitleValue('OP');
       return Blockly.Language.text_compare.TOOLTIPS[mode];
     });
-    this.appendCollapsedInput().appendTitle('compare', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_TEXT_COMPARE_INPUT_COMPARE, 'COLLAPSED_TEXT');
   },
   typeblock: [{
     translatedName: Blockly.LANG_TEXT_COMPARE_INPUT_COMPARE + ' <',
@@ -192,15 +188,9 @@ Blockly.Language.text_compare = {
 Blockly.Language.text_compare.OPERATORS = [ [ '<', 'LT' ], [ '=', 'EQUAL' ], [ '>', 'GT' ] ];
 
 Blockly.Language.text_compare.TOOLTIPS = {
-  LT : 'Tests whether text1 is lexicographically less than text2.\n'
-      + 'if one text is the prefix of the other, the shorter text is\n'
-      + 'considered smaller. Uppercase characters precede lowercase characters.',
-  EQUAL : 'Tests whether text strings are identical, ie., have the same\n'
-      + 'characters in the same order. This is different from ordinary =\n'
-      + 'in the case where the text strings are numbers: 123 and 0123 are =\n' + 'but not text =.',
-  GT : 'Reports whether text1 is lexicographically greater than text2.\n'
-      + 'if one text is the prefix of the other, the shorter text is considered smaller.\n'
-      + 'Uppercase characters precede lowercase characters.'
+  LT : Blockly.LANG_TEXT_COMPARE_TOOLTIP_LT,
+  EQUAL : Blockly.LANG_TEXT_COMPARE_TOOLTIP_EQUAL,
+  GT : Blockly.LANG_TEXT_COMPARE_TOOLTIP_GT
 };
 
 Blockly.Language.text_trim = {
@@ -212,9 +202,9 @@ Blockly.Language.text_trim = {
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.OUTPUT));
     this.appendValueInput('TEXT')
       .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('trim');
+      .appendTitle(Blockly.LANG_TEXT_TRIM_TITLE_TRIM);
     this.setTooltip(Blockly.LANG_TEXT_TRIM_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('trim', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_TEXT_TRIM_TITLE_TRIM, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_TEXT_TRIM_TITLE_TRIM }]
 };
@@ -258,7 +248,9 @@ Blockly.Language.text_changeCase = {
   }
 };
 
-Blockly.Language.text_changeCase.OPERATORS = [ [ 'upcase', 'UPCASE' ], [ 'downcase', 'DOWNCASE' ] ];
+Blockly.Language.text_changeCase.OPERATORS =
+        [ [ Blockly.LANG_TEXT_CHANGECASE_OPERATOR_UPPERCASE, 'UPCASE' ],
+        [ Blockly.LANG_TEXT_CHANGECASE_OPERATOR_DOWNCASE, 'DOWNCASE' ] ];
 
 Blockly.Language.text_changeCase.TOOLTIPS = {
   UPCASE : Blockly.LANG_TEXT_CHANGECASE_TOOLTIP_UPPERCASE,
@@ -279,14 +271,13 @@ Blockly.Language.text_starts_at = {
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.OUTPUT));
     this.appendValueInput('TEXT')
       .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('starts at')
-      .appendTitle('text');
-    this.appendValueInput('PIECE')
-      .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('piece')
+      .appendTitle(Blockly.LANG_TEXT_STARTS_AT_INPUT_STARTS_AT)
+      .appendTitle(Blockly.LANG_TEXT_STARTS_AT_INPUT_TEXT);
+    this.appendValueInput('PIECE').setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
+      .appendTitle(Blockly.LANG_TEXT_STARTS_AT_INPUT_PIECE)
       .setAlign(Blockly.ALIGN_RIGHT);
     this.setTooltip(Blockly.LANG_TEXT_STARTS_AT_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('starts', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_TEXT_STARTS_AT_INPUT_STARTS_AT, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_TEXT_STARTS_AT_INPUT_STARTS_AT }]
 };
@@ -298,16 +289,13 @@ Blockly.Language.text_contains = {
   init : function() {
     this.setColour(Blockly.TEXT_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("boolean",Blockly.Language.OUTPUT));
-    this.appendValueInput('TEXT')
-      .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('contains')
-      .appendTitle('text');
-    this.appendValueInput('PIECE')
-      .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('piece')
+    this.appendValueInput('TEXT').setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
+        .appendTitle(Blockly.LANG_TEXT_CONTAINS_INPUT_CONTAINS)
+                .appendTitle(Blockly.LANG_TEXT_COMTAINS_INPUT_TEXT);
+    this.appendValueInput('PIECE').setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT)).appendTitle(Blockly.LANG_TEXT_CONTAINS_INPUT_PIECE)
       .setAlign(Blockly.ALIGN_RIGHT);
     this.setTooltip(Blockly.LANG_TEXT_CONTAINS_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('contains', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_TEXT_COMTAINS_INPUT_TEXT, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_TEXT_CONTAINS_INPUT_CONTAINS }]
 };
@@ -325,11 +313,11 @@ Blockly.Language.text_split = {
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.OUTPUT));
     this.appendValueInput('TEXT')
       .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle(new Blockly.FieldDropdown(this.OPERATORS,Blockly.Language.text_split.dropdown_onchange), 'OP')
-      .appendTitle('text');
+        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS,Blockly.Language.text_split.dropdown_onchange), 'OP')
+        .appendTitle(Blockly.LANG_TEXT_SPLIT_INPUT_TEXT);
     this.appendValueInput('AT')
       .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('at')
+      .appendTitle(Blockly.LANG_TEXT_SPLIT_INPUT_AT)
       .setAlign(Blockly.ALIGN_RIGHT);
     var thisBlock = this;
     this.setTooltip(function() {
@@ -378,9 +366,11 @@ Blockly.Language.text_split.dropdown_onchange = function(value) {
   }
 };
 
-Blockly.Language.text_split.OPERATORS = [ [ 'split at first', 'SPLITATFIRST' ],
-    [ 'split at first of any', 'SPLITATFIRSTOFANY' ], [ 'split', 'SPLIT' ],
-    [ 'split at any', 'SPLITATANY' ] ];
+Blockly.Language.text_split.OPERATORS =
+        [ [ Blockly.LANG_TEXT_SPLIT_OPERATOR_SPLIT_AT_FIRST, 'SPLITATFIRST' ],
+    [ Blockly.LANG_TEXT_SPLIT_OPERATOR_SPLIT_AT_FIRST_OF_ANY, 'SPLITATFIRSTOFANY' ],
+        [ Blockly.LANG_TEXT_SPLIT_OPERATOR_SPLIT, 'SPLIT' ],
+    [ Blockly.LANG_TEXT_SPLIT_OPERATOR_SPLIT_AT_ANY, 'SPLITATANY' ] ];
 
 Blockly.Language.text_split.TOOLTIPS = {
   SPLITATFIRST : Blockly.LANG_TEXT_SPLIT_TOOLTIP_SPLIT_AT_FIRST,
@@ -403,9 +393,9 @@ Blockly.Language.text_split_at_spaces = {
   init : function() {
     this.setColour(Blockly.TEXT_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.OUTPUT));
-    this.appendValueInput('TEXT').setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT)).appendTitle('split at spaces');
+    this.appendValueInput('TEXT').setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT)).appendTitle(Blockly.LANG_TEXT_SPLIT_AT_SPACES_TITLE);
     this.setTooltip(Blockly.LANG_TEXT_SPLIT_AT_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('split at spaces', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_TEXT_SPLIT_AT_SPACES_TITLE, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_TEXT_SPLIT_AT_SPACES_TITLE }]
 };
@@ -419,18 +409,18 @@ Blockly.Language.text_segment = {
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.OUTPUT));
     this.appendValueInput('TEXT')
       .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('segment')
-      .appendTitle('text');
+      .appendTitle(Blockly.LANG_TEXT_SEGMENT_TITLE_SEGMENT)
+      .appendTitle(Blockly.LANG_TEXT_SEGMENT_INPUT_TEXT);
     this.appendValueInput('START')
       .setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT))
-      .appendTitle('start')
+      .appendTitle(Blockly.LANG_TEXT_SEGMENT_INPUT_START)
       .setAlign(Blockly.ALIGN_RIGHT);
     this.appendValueInput('LENGTH')
       .setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT))
-      .appendTitle('length')
+      .appendTitle(Blockly.LANG_TEXT_SEGMENT_INPUT_LENGTH)
       .setAlign(Blockly.ALIGN_RIGHT);
     this.setTooltip(Blockly.LANG_TEXT_SEGMENT_AT_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('segment', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_TEXT_SEGMENT_INPUT_LENGTH, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_TEXT_SEGMENT_TITLE_SEGMENT }]
 };
@@ -444,18 +434,18 @@ Blockly.Language.text_replace_all = {
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.OUTPUT));
     this.appendValueInput('TEXT')
       .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('replace all')
-      .appendTitle('text');
+      .appendTitle(Blockly.LANG_TEXT_REPLACE_ALL_TITLE_REPLACE_ALL)
+      .appendTitle(Blockly.LANG_TEXT_REPLACE_ALL_INPUT_TEXT);
     this.appendValueInput('SEGMENT')
       .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('segment')
+      .appendTitle(Blockly.LANG_TEXT_REPLACE_ALL_INPUT_SEGMENT)
       .setAlign(Blockly.ALIGN_RIGHT);
     this.appendValueInput('REPLACEMENT')
       .setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT))
-      .appendTitle('replacement')
+      .appendTitle(Blockly.LANG_TEXT_REPLACE_ALL_INPUT_REPLACEMENT)
       .setAlign(Blockly.ALIGN_RIGHT);
     this.setTooltip(Blockly.LANG_TEXT_REPLACE_ALL_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('replace all', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_TEXT_REPLACE_ALL_INPUT_REPLACEMENT, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_TEXT_REPLACE_ALL_TITLE_REPLACE_ALL }]
 };

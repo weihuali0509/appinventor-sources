@@ -33,7 +33,7 @@ Blockly.Language.lists_create_with = {
   init: function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
     this.appendValueInput('ADD0')
-        .appendTitle("make a list");
+      .appendTitle(Blockly.LANG_LISTS_CREATE_WITH_TITLE_MAKE_LIST);
     this.appendValueInput('ADD1');
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.OUTPUT));
     this.setMutator(new Blockly.Mutator(['lists_create_with_item']));
@@ -57,7 +57,7 @@ Blockly.Language.lists_create_with = {
   addInput: function(inputNum){
     var input = this.appendValueInput(this.repeatingInputName + inputNum);
     if(inputNum === 0){
-      input.appendTitle("make a list");
+      input.appendTitle(Blockly.LANG_LISTS_CREATE_WITH_TITLE_MAKE_LIST);
     }
     return input;
   },
@@ -85,15 +85,16 @@ Blockly.Language.lists_create_with_item = {
   }
 };
 
-
 Blockly.Language.lists_add_items = {
   // Create a list with any number of elements of any type.
   category: Blockly.LANG_CATEGORY_LISTS,
   helpUrl: Blockly.LANG_LISTS_ADD_ITEMS_HELPURL,
   init: function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
-    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('add items to list').appendTitle(' list');
-    this.appendValueInput('ITEM0').appendTitle('item').setAlign(Blockly.ALIGN_RIGHT);
+    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_LISTS_ADD_ITEMS_TITLE_ADD).appendTitle(' list');
+    this.appendValueInput('ITEM0')
+                .appendTitle(Blockly.LANG_LISTS_ADD_ITEMS_INPUT_ITEM).setAlign(Blockly.ALIGN_RIGHT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_ADD_ITEMS_TOOLTIP);
@@ -113,7 +114,7 @@ Blockly.Language.lists_add_items = {
   addEmptyInput: function(){},
   addInput: function(inputNum){
     var input = this.appendValueInput(this.repeatingInputName + inputNum);
-    input.appendTitle('item').setAlign(Blockly.ALIGN_RIGHT);
+    input.appendTitle(Blockly.LANG_LISTS_ADD_ITEMS_INPUT_ITEM).setAlign(Blockly.ALIGN_RIGHT);
     return input;
   },
   updateContainerBlock: function(containerBlock) {
@@ -144,14 +145,16 @@ Blockly.Language.lists_is_in = {
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("boolean",Blockly.Language.OUTPUT));
-    this.appendValueInput('ITEM').appendTitle('is in list?').appendTitle('thing');
-    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('list').setAlign(Blockly.ALIGN_RIGHT);
+    this.appendValueInput('ITEM')
+        .appendTitle( Blockly.LANG_LISTS_IS_IN_TITLE_IS_IN)
+        .appendTitle(Blockly.LANG_LISTS_IS_IN_INPUT_THING);
+    this.appendValueInput('LIST').setCheck(Array)
+        .appendTitle(Blockly.LANG_LISTS_IS_IN_INPUT_LIST).setAlign(Blockly.ALIGN_RIGHT);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_IS_IN_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('in list', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_IS_IN_INPUT_LIST, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_IS_IN_TITLE_IS_IN }]
 };
-
 
 Blockly.Language.lists_length = {
   // Length of list.
@@ -160,9 +163,11 @@ Blockly.Language.lists_length = {
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.OUTPUT));
-    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('length of list').appendTitle('list');
+    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT))
+        .appendTitle(Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH)
+        .appendTitle(Blockly.LANG_LISTS_LENGTH_INPUT_LIST);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_LENGTH_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('length', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH }]
 };
@@ -174,9 +179,11 @@ Blockly.Language.lists_is_empty = {
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("boolean",Blockly.Language.OUTPUT));
-    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('is list empty?').appendTitle('list');
-    Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_IS_EMPTY_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('is empty?', 'COLLAPSED_TEXT');
+    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("boolean",Blockly.Language.OUTPUT))
+          .appendTitle(Blockly.LANG_LISTS_TITLE_IS_EMPTY)
+          .appendTitle(Blockly.LANG_LISTS_INPUT_LIST);
+    Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_TOOLTIP);
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_TITLE_IS_EMPTY, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_TITLE_IS_EMPTY }]
 };
@@ -188,9 +195,11 @@ Blockly.Language.lists_pick_random_item = {
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
     this.setOutput(true, null);
-    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('pick a random item').appendTitle('list');
+    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_LISTS_PICK_RANDOM_TITLE_PICK_RANDOM)
+                .appendTitle(Blockly.LANG_LISTS_PICK_RANDOM_ITEM_INPUT_LIST);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_PICK_RANDOM_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('pick random', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_PICK_RANDOM_TITLE_PICK_RANDOM, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_PICK_RANDOM_TITLE_PICK_RANDOM }]
 };
@@ -203,14 +212,17 @@ Blockly.Language.lists_position_in = {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.OUTPUT));
 
-    this.appendValueInput('ITEM').appendTitle('index in list').appendTitle('thing');
-    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('list').setAlign(Blockly.ALIGN_RIGHT);
+    this.appendValueInput('ITEM')
+      .appendTitle(Blockly.LANG_LISTS_POSITION_IN_TITLE_POSITION)
+      .appendTitle(Blockly.LANG_LISTS_POSITION_IN_INPUT_THING);
+    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT))
+      .appendTitle(Blockly.LANG_LISTS_POSITION_IN_INPUT_LIST)
+      .setAlign(Blockly.ALIGN_RIGHT);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_POSITION_IN_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('index', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_POSITION_IN_TITLE_POSITION, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_POSITION_IN_TITLE_POSITION }]
 };
-
 
 Blockly.Language.lists_select_item = {
   // Select from list an item.
@@ -219,10 +231,14 @@ Blockly.Language.lists_select_item = {
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
     this.setOutput(true, null);
-    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('select list item').appendTitle('list');
-    this.appendValueInput('NUM').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT)).appendTitle('index').setAlign(Blockly.ALIGN_RIGHT);
+    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT))
+      .appendTitle(Blockly.LANG_LISTS_SELECT_ITEM_TITLE_SELECT)
+      .appendTitle(Blockly.LANG_LISTS_SELECT_ITEM_INPUT_LIST);
+    this.appendValueInput('NUM').setCheck(Number)
+      .appendTitle(Blockly.LANG_LISTS_SELECT_ITEM_INPUT_INDEX)
+      .setAlign(Blockly.ALIGN_RIGHT);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_SELECT_ITEM_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('select', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_SELECT_ITEM_TITLE_SELECT, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_SELECT_ITEM_TITLE_SELECT }]
 };
@@ -239,7 +255,14 @@ Blockly.Language.lists_insert_item = {
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_INSERT_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('insert', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_SELECT_ITEM_TITLE_SELECT }]
+};
+
+Blockly.Language.lists_insert_item = {
+  // Insert Item in list.
+  category : Blockly.LANG_CATEGORY_LISTS,
+  helpUrl : Blockly.LANG_LISTS_INSERT_ITEM_HELPURL,
+  init : function(, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_INSERT_TITLE_INSERT_LIST }]
 };
@@ -250,13 +273,19 @@ Blockly.Language.lists_replace_item = {
   helpUrl : Blockly.LANG_LISTS_REPLACE_ITEM_HELPURL,
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
-    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('replace list item').appendTitle('list');
-    this.appendValueInput('NUM').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT)).appendTitle('index').setAlign(Blockly.ALIGN_RIGHT);
-    this.appendValueInput('ITEM').appendTitle('replacement').setAlign(Blockly.ALIGN_RIGHT);
+    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_LISTS_REPLACE_ITEM_TITLE_REPLACE)
+                .appendTitle(Blockly.LANG_LISTS_REPLACE_ITEM_INPUT_LIST);
+    this.appendValueInput('NUM').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_LISTS_REPLACE_ITEM_INPUT_INDEX)
+                .setAlign(Blockly.ALIGN_RIGHT);
+    this.appendValueInput('ITEM')
+                .appendTitle(Blockly.LANG_LISTS_REPLACE_ITEM_INPUT_REPLACEMENT)
+                .setAlign(Blockly.ALIGN_RIGHT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_REPLACE_ITEM_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('replace', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_REPLACE_ITEM_TITLE_REPLACE, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_REPLACE_ITEM_TITLE_REPLACE }]
 };
@@ -267,12 +296,16 @@ Blockly.Language.lists_remove_item = {
   helpUrl : Blockly.LANG_LISTS_REMOVE_ITEM_HELPURL,
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
-    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('remove list item').appendTitle('list');
-    this.appendValueInput('INDEX').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT)).appendTitle('index').setAlign(Blockly.ALIGN_RIGHT);
+    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_LISTS_REMOVE_ITEM_TITLE_REMOVE)
+                .appendTitle(Blockly.LANG_LISTS_REMOVE_ITEM_INPUT_LIST);
+    this.appendValueInput('INDEX').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_LISTS_REMOVE_ITEM_INPUT_INDEX)
+                .setAlign(Blockly.ALIGN_RIGHT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_REMOVE_ITEM_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('remove', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_REMOVE_ITEM_TITLE_REMOVE, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_REMOVE_ITEM_TITLE_REMOVE }]
 };
@@ -283,16 +316,18 @@ Blockly.Language.lists_append_list = {
   helpUrl : Blockly.LANG_LISTS_APPEND_LIST_HELPURL,
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
-    this.appendValueInput('LIST0').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('append to list').appendTitle('list1');
-    this.appendValueInput('LIST1').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('list2').setAlign(Blockly.ALIGN_RIGHT);
+    this.appendValueInput('LIST0').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_LISTS_APPEND_LIST_TITLE_APPEND)
+                .appendTitle(Blockly.LANG_LISTS_APPEND_LIST_INPUT_LIST1);
+    this.appendValueInput(Blockly.LANG_LISTS_APPEND_LIST_INPUT_LIST1).setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_LISTS_APPEND_LIST_INPUT_LIST2).setAlign(Blockly.ALIGN_RIGHT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_APPEND_LIST_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('append', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_APPEND_LIST_TITLE_APPEND, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_APPEND_LIST_TITLE_APPEND }]
 };
-
 
 Blockly.Language.lists_copy = {
   // Make a copy of list.
@@ -315,9 +350,11 @@ Blockly.Language.lists_is_list = {
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("boolean",Blockly.Language.OUTPUT));
-    this.appendValueInput('ITEM').appendTitle('is a list?').appendTitle('thing');
+    this.appendValueInput('ITEM')
+                .appendTitle(Blockly.LANG_LISTS_IS_LIST_TITLE_IS_LIST)
+                .appendTitle(Blockly.LANG_LISTS_IS_LIST_INPUT_THING);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_IS_LIST_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('list?', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_IS_LIST_TITLE_IS_LIST, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_IS_LIST_TITLE_IS_LIST }]
 };
@@ -328,10 +365,12 @@ Blockly.Language.lists_to_csv_row = {
   helpUrl : Blockly.LANG_LISTS_TO_CSV_ROW_HELPURL,
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
-    this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.OUTPUT));
-    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('list to csv row').appendTitle('list');
+    this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT));
+    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_LISTS_TO_CSV_ROW_TITLE_TO_CSV)
+                .appendTitle(Blockly.LANG_LISTS_TO_CSV_ROW_INPUT_LIST);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_TO_CSV_ROW_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('to csv row', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_TO_CSV_ROW_TITLE_TO_CSV, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_TO_CSV_ROW_TITLE_TO_CSV }]
 };
@@ -342,10 +381,12 @@ Blockly.Language.lists_to_csv_table = {
   helpUrl : Blockly.LANG_LISTS_TO_CSV_TABLE_HELPURL,
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
-    this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.OUTPUT));
-    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT)).appendTitle('list to csv table').appendTitle('list');
+    this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT));
+    this.appendValueInput('LIST').setCheck(Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_LISTS_TO_CSV_TABLE_TITLE_TO_CSV)
+                .appendTitle(Blockly.LANG_LISTS_TO_CSV_TABLE_INPUT_LIST);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_TO_CSV_TABLE_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('to csv table', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_TO_CSV_TABLE_TITLE_TO_CSV, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_TO_CSV_TABLE_TITLE_TO_CSV }]
 };
@@ -357,9 +398,11 @@ Blockly.Language.lists_from_csv_row = {
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.OUTPUT));
-    this.appendValueInput('TEXT').setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT)).appendTitle('list from csv row').appendTitle('text');
+    this.appendValueInput('TEXT').setCheck(String)
+                .appendTitle(Blockly.LANG_LISTS_FROM_CSV_ROW_TITLE_FROM_CSV)
+                .appendTitle(Blockly.LANG_LISTS_FROM_CSV_ROW_INPUT_TEXT);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_FROM_CSV_ROW_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('from csv row', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_FROM_CSV_ROW_TITLE_FROM_CSV, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_FROM_CSV_ROW_TITLE_FROM_CSV }]
 };
@@ -371,9 +414,11 @@ Blockly.Language.lists_from_csv_table = {
   init : function() {
     this.setColour(Blockly.LIST_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("list",Blockly.Language.OUTPUT));
-    this.appendValueInput('TEXT').setCheck(Blockly.Language.YailTypeToBlocklyType("text",Blockly.Language.INPUT)).appendTitle('list from csv table').appendTitle('text');
+    this.appendValueInput('TEXT').setCheck(String)
+                .appendTitle(Blockly.LANG_LISTS_FROM_CSV_TABLE_TITLE_FROM_CSV)
+                .appendTitle(Blockly.LANG_LISTS_FROM_CSV_TABLE_INPUT_TEXT);
     Blockly.Language.setTooltip(this, Blockly.LANG_LISTS_FROM_CSV_TABLE_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('from csv table', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LISTS_FROM_CSV_TABLE_TITLE_FROM_CSV, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName: Blockly.LANG_LISTS_FROM_CSV_TABLE_TITLE_FROM_CSV }]
 };

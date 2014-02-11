@@ -214,7 +214,7 @@ Blockly.Language.math_mutator_item = {
     this.setColour(Blockly.MATH_CATEGORY_HUE);
     this.appendDummyInput()
         //.appendTitle(Blockly.LANG_LISTS_CREATE_WITH_ITEM_TITLE);
-        .appendTitle("number");
+        .appendTitle(Blockly.LANG_MATH_MUTATOR_ITEM_INPUT_NUMBER);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     //this.setTooltip(Blockly.LANG_LISTS_CREATE_WITH_ITEM_TOOLTIP_1);
@@ -347,8 +347,10 @@ Blockly.Language.math_random_int = {
   init: function() {
     this.setColour(Blockly.MATH_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.OUTPUT));
-    this.appendValueInput('FROM').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT)).appendTitle('random integer').appendTitle('from');
-    this.appendValueInput('TO').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT)).appendTitle('to');
+    this.appendValueInput('FROM').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT))
+        .appendTitle(Blockly.LANG_MATH_RANDOM_INT_TITLE_RANDOM)
+                .appendTitle(Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM);
+    this.appendValueInput('TO').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT)).appendTitle(Blockly.LANG_MATH_RANDOM_INT_INPUT_TO);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_MATH_RANDOM_INT_TOOLTIP );
     this.appendCollapsedInput().appendTitle(Blockly.LANG_MATH_RANDOM_INT_TITLE_RANDOM, 'COLLAPSED_TEXT');
@@ -363,9 +365,9 @@ Blockly.Language.math_random_float = {
   init: function() {
     this.setColour(Blockly.MATH_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.OUTPUT));
-    this.appendDummyInput().appendTitle('random fraction');
+    this.appendDummyInput().appendTitle(Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM);
     this.setTooltip(Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP);
-    this.appendCollapsedInput().appendTitle(Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM, 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle();
   },
   typeblock: [{ translatedName: Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM }]
 };
@@ -377,7 +379,9 @@ Blockly.Language.math_random_set_seed = {
   init: function() {
     this.setColour(Blockly.MATH_CATEGORY_HUE);
     this.setOutput(false, Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.OUTPUT));
-    this.appendValueInput('NUM').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT)).appendTitle('random set seed').appendTitle('to');
+    this.appendValueInput('NUM').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_MATH_RANDOM_SEED_TITLE_RANDOM)
+                .appendTitle(Blockly.LANG_MATH_RANDOM_SEED_INPUT_TO);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.LANG_MATH_RANDOM_SEED_TOOLTIP);
@@ -390,7 +394,7 @@ Blockly.Language.math_on_list = {
   // Evaluate a list of numbers to return sum, average, min, max, etc.
   // Some functions also work on text (min, max, mode, median).
   category: Blockly.LANG_CATEGORY_MATH,
-  helpUrl: '',
+  helpUrl: Blockly.LANG_MATH_ONLIST_HELPURL,
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
@@ -459,12 +463,12 @@ Blockly.Language.math_on_list = {
 };
 
 Blockly.Language.math_on_list.OPERATORS =
-  [['min', 'MIN'],
-   ['max', 'MAX']];
+  [[Blockly.LANG_MATH_ONLIST_OPERATOR_MIN, 'MIN'],
+   [Blockly.LANG_MATH_ONLIST_OPERATOR_MAX, 'MAX']];
 
 Blockly.Language.math_on_list.TOOLTIPS = {
-  MIN: 'Return the smallest of its arguments..',
-  MAX: 'Return the largest of its arguments..'
+  MIN: Blockly.LANG_MATH_ONLIST_TOOLTIP_MIN,
+  MAX: Blockly.LANG_MATH_ONLIST_TOOLTIP_MAX
 };
 
 
@@ -572,6 +576,7 @@ Blockly.Language.math_single.HELPURLS = {
   CEILING : Blockly.LANG_MATH_ROUND_HELPURL_CEILING,
   FLOOR : Blockly.LANG_MATH_ROUND_HELPURL_FLOOR
 };
+
 
 Blockly.Language.math_abs = {
   // Advanced math operators with single operand.
@@ -727,9 +732,9 @@ Blockly.Language.math_divide = {
 };
 
 Blockly.Language.math_divide.OPERATORS =
-  [['modulo of', 'MODULO'],
-   ['remainder of', 'REMAINDER'],
-   [ 'quotient of', 'QUOTIENT' ]];
+  [[Blockly.LANG_MATH_DIVIDE_OPERATOR_MODULO, 'MODULO'],
+   [Blockly.LANG_MATH_DIVIDE_OPERATOR_REMAINDER, 'REMAINDER'],
+   [Blockly.LANG_MATH_DIVIDE_OPERATOR_QUOTIENT, 'QUOTIENT' ]];
 
 Blockly.Language.math_divide.TOOLTIPS = {
   MODULO: Blockly.LANG_MATH_DIVIDE_TOOLTIP_MODULO,
@@ -902,7 +907,9 @@ Blockly.Language.math_convert_angles = {
   init : function() {
     this.setColour(Blockly.MATH_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.OUTPUT));
-    this.appendValueInput('NUM').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT)).appendTitle('convert').appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+    this.appendValueInput('NUM').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_MATH_CONVERT_ANGLES_TITLE_CONVERT)
+                .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
     this.setTooltip(function() {
@@ -933,8 +940,8 @@ Blockly.Language.math_convert_angles = {
 };
 
 Blockly.Language.math_convert_angles.OPERATORS =
-  [[ 'radians to degrees', 'RADIANS_TO_DEGREES' ],
-   [ 'degrees to radians', 'DEGREES_TO_RADIANS' ]];
+  [[ Blockly.LANG_MATH_CONVERT_ANGLES_OP_RAD_TO_DEG, 'RADIANS_TO_DEGREES' ],
+   [ Blockly.LANG_MATH_CONVERT_ANGLES_OP_DEG_TO_RAD, 'DEGREES_TO_RADIANS' ]];
 
 Blockly.Language.math_convert_angles.TOOLTIPS = {
   RADIANS_TO_DEGREES : Blockly.LANG_MATH_CONVERT_ANGLES_TOOLTIP_RAD_TO_DEG,
@@ -952,9 +959,11 @@ Blockly.Language.math_format_as_decimal = {
   init : function() {
     this.setColour(Blockly.MATH_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.OUTPUT));
-    this.appendDummyInput().appendTitle('format as decimal');
-    this.appendValueInput('NUM').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT)).appendTitle('number').setAlign(Blockly.ALIGN_RIGHT);
-    this.appendValueInput('PLACES').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT)).appendTitle('places').setAlign(Blockly.ALIGN_RIGHT);
+    this.appendDummyInput().appendTitle(Blockly.LANG_MATH_FORMAT_AS_DECIMAL_TITLE);
+    this.appendValueInput('NUM')
+                .setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT)).appendTitle(Blockly.LANG_MATH_FORMAT_AS_DECIMAL_INPUT_NUM).setAlign(Blockly.ALIGN_RIGHT);
+    this.appendValueInput('PLACES').setCheck(Blockly.Language.YailTypeToBlocklyType("number",Blockly.Language.INPUT))
+                .appendTitle(Blockly.LANG_MATH_FORMAT_AS_DECIMAL_INPUT_PLACES).setAlign(Blockly.ALIGN_RIGHT);
     this.setInputsInline(false);
     this.setTooltip(Blockly.LANG_MATH_FORMAT_AS_DECIMAL_TOOLTIP);
     this.appendCollapsedInput().appendTitle('format decimal', 'COLLAPSED_TEXT');
@@ -968,7 +977,7 @@ Blockly.Language.math_is_a_number = {
   init : function() {
     this.setColour(Blockly.MATH_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("boolean",Blockly.Language.OUTPUT));
-    this.appendValueInput('NUM').appendTitle('is a number?');
+    this.appendValueInput('NUM').appendTitle(Blockly.LANG_MATH_IS_A_NUMBER_INPUT_NUM);
     this.setTooltip(function() {
       return Blockly.LANG_MATH_IS_A_NUMBER_TOOLTIP;
     });

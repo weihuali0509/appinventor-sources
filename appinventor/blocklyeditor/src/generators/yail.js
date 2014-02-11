@@ -381,7 +381,7 @@ Blockly.Yail.getPropertySetterString = function(componentName, componentType, pr
 /**
  * Generate the Yail code for a property value. Special case handling when propertyType is
  * "'number", "'boolean", "'component", the empty string, or null. For all other property values
- * it returns the value as converted by Blockly.Yail.quotifyForREPL().
+ * it returns the value as converted by Blockly.Yail.quotify().
  *
  * @param {String} propertyValue
  * @param {String} propertyType
@@ -414,7 +414,7 @@ Blockly.Yail.getPropertyValueString = function(propertyValue, propertyType) {
   if (propertyValue == "" || propertyValue == "null") {  // empty string
     return "\"\"";
   }
-  return Blockly.Yail.quotifyForREPL(propertyValue);
+  return Blockly.Yail.quote_(propertyValue);
 }
 
 /**
@@ -426,28 +426,31 @@ Blockly.Yail.getPropertyValueString = function(propertyValue, propertyType) {
  * @private
  */
 Blockly.Yail.getComponentRenameString = function(oldName, newName) {
-  return Blockly.Yail.YAIL_RENAME_COMPONENT + Blockly.Yail.quotifyForREPL(oldName) 
-    + Blockly.Yail.YAIL_SPACER + Blockly.Yail.quotifyForREPL(newName) 
+  return Blockly.Yail.YAIL_RENAME_COMPONENT + Blockly.Yail.quotify(oldName) 
+    + Blockly.Yail.YAIL_SPACER + Blockly.Yail.quotify(newName) 
     + Blockly.Yail.YAIL_CLOSE_BLOCK;
 }
 
 /**
- * Transform a string to the Kawa input representation of the string, for sending to
- * the REPL, by using backslash to escape quotes and backslashes. But do not escape a backslash
- * if it is part of \n. Then enclose the result in quotes.
- * TODO: Extend this to a complete transformation that deals with the full set of formatting
- * characters.
+ * Transform a string to the Kawa input representation of the string
+ * by using backslash to escape quotes and backslashes. But do not
+ * escape a backslash if it is part of \n. Then enclose the result in
+ * quotes.  TODO: Extend this to a complete transformation that deals
+ * with the full set of formatting characters.
  *
  * @param {String} s string to be quotified
+ * @param {Boolean} if set, don't add the double quotes
  * @returns {String}
  * @private
  */
-Blockly.Yail.quotifyForREPL = function(s) {
+Blockly.Yail.quotify = function(s, noquote) {
+  var c;
   if (!s) {
     return null;
   } else {
     var sb = [];
-    sb.push('"');
+    if (!noquote)
+      sb.push('"');
     var len = s.length;
     var lastIndex = len - 1;
     for (var i = 0; i < len; i++) {
@@ -464,7 +467,8 @@ Blockly.Yail.quotifyForREPL = function(s) {
           sb.push(c);
         }
       } else if (c == '"') {
-        sb.push('\\');
+        if (!noquote)
+          sb.push('\\');
         sb.push(c);
       } else {
         var u = s.charCodeAt(i);  // unicode of c
@@ -478,7 +482,8 @@ Blockly.Yail.quotifyForREPL = function(s) {
         }
       }
     }
-    sb.push('"');
+    if (!noquote)
+      sb.push('"');
     return sb.join("");
   }
 }

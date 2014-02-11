@@ -108,9 +108,10 @@ Blockly.Language.logic_negate = {
   init : function() {
     this.setColour(Blockly.LOGIC_CATEGORY_HUE);
     this.setOutput(true, Blockly.Language.YailTypeToBlocklyType("boolean",Blockly.Language.OUTPUT));
-    this.appendValueInput('BOOL').setCheck(Blockly.Language.YailTypeToBlocklyType("boolean",Blockly.Language.INPUT)).appendTitle('not');
+    this.appendValueInput('BOOL').setCheck(Boolean)
+		.appendTitle(Blockly.LANG_LOGIC_NEGATE_INPUT_NOT);
     this.setTooltip(Blockly.LANG_LOGIC_NEGATE_TOOLTIP);
-    this.appendCollapsedInput().appendTitle('not', 'COLLAPSED_TEXT');
+    this.appendCollapsedInput().appendTitle(Blockly.LANG_LOGIC_NEGATE_INPUT_NOT, 'COLLAPSED_TEXT');
   },
   typeblock: [{ translatedName:Blockly.LANG_LOGIC_NEGATE_INPUT_NOT }]
 };
@@ -147,10 +148,8 @@ Blockly.Language.logic_compare = {
 };
 
 Blockly.Language.logic_compare.TOOLTIPS = {
-  EQ: 'Tests whether two things are equal. \n' +
-        'The things being compared can be any thing, not only numbers.',
-  NEQ: 'Tests whether two things are not equal. \n' +
-        'The things being compared can be any thing, not only numbers.'
+  EQ : Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ,
+  NEQ : Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ
 };
 
 Blockly.Language.logic_compare.HELPURLS = {

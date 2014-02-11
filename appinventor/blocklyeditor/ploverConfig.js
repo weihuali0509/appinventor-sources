@@ -7,6 +7,9 @@
     '../lib/blockly/src/core/blockly.js',
 
     //language/en/*.js has to come next (for constants)
+    './src/language/de/_messages.js',
+    './src/language/vn/_messages.js',
+    './src/language/zh_tw/_messages.js',
     './src/language/en/_messages.js',
 
     //the rest of the blockly .js files can come in any order
@@ -52,6 +55,10 @@
     //finally, include any of our own .js file in any order
     "./src/blocklyeditor.js",
     "./src/blockColors.js",
+    "./src/translation_properties.js",
+    "./src/translation_events.js",
+    "./src/translation_methods.js",
+    "./src/translation_params.js",
     "./src/component.js",
     "./src/drawer.js",
     "./src/savefile.js",
@@ -68,6 +75,7 @@
     "./src/field_parameter_flydown.js",
     "./src/field_global_flydown.js",
     "./src/field_procedure_flydown.js",
+    "./src/language_switch.js",
 
     //language files
     './src/language/common/control.js',

@@ -5,10 +5,13 @@
 
 package com.google.appinventor.client.editor.youngandroid.palette;
 
+import static com.google.appinventor.client.Ode.MESSAGES;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.appinventor.client.TranslationDesignerProperties;
 import com.google.appinventor.client.editor.simple.SimpleComponentDatabase;
 import com.google.appinventor.client.editor.simple.components.MockComponent;
 import com.google.appinventor.client.editor.simple.palette.DropTargetProvider;
@@ -30,10 +33,10 @@ import com.google.appinventor.client.editor.youngandroid.properties.YoungAndroid
 import com.google.appinventor.client.editor.youngandroid.properties.YoungAndroidScreenOrientationChoicePropertyEditor;
 import com.google.appinventor.client.editor.youngandroid.properties.YoungAndroidSensorDistIntervalChoicePropertyEditor;
 import com.google.appinventor.client.editor.youngandroid.properties.YoungAndroidSensorTimeIntervalChoicePropertyEditor;
+import com.google.appinventor.client.editor.youngandroid.properties.YoungAndroidTextReceivingPropertyEditor;
 import com.google.appinventor.client.editor.youngandroid.properties.YoungAndroidToastLengthChoicePropertyEditor;
 import com.google.appinventor.client.editor.youngandroid.properties.YoungAndroidVerticalAlignmentChoicePropertyEditor;
 import com.google.appinventor.client.editor.youngandroid.properties.YoungAndroidVisibilityChoicePropertyEditor;
-import com.google.appinventor.client.editor.youngandroid.properties.YoungAndroidTextReceivingPropertyEditor;
 import com.google.appinventor.client.widgets.properties.FloatPropertyEditor;
 import com.google.appinventor.client.widgets.properties.IntegerPropertyEditor;
 import com.google.appinventor.client.widgets.properties.NonNegativeFloatPropertyEditor;
@@ -142,7 +145,10 @@ public class YoungAndroidPalettePanel extends Composite implements SimplePalette
     // Configure properties
     for (PropertyDefinition property : COMPONENT_DATABASE.getPropertyDefinitions(componentType)) {
       mockComponent.addProperty(property.getName(), property.getDefaultValue(),
-          property.getCaption(), createPropertyEditor(property.getEditorType()));
+          TranslationDesignerProperties.getCorrespondingString(property.getCaption()),
+          createPropertyEditor(property.getEditorType()));
+      /*OdeLog.log("Property Caption: " + property.getCaption() + ", "
+          + TranslationComponentProperty.getName(property.getCaption()));*/
     }
   }
 

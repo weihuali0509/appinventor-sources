@@ -46,7 +46,12 @@
           depends="init,blocklyeditor_BlocklyCompile">
     <mkdir dir="${build.war.dir}" />
     <copy todir="${build.war.dir}/">
-      <fileset dir="war"/>
+      <fileset dir="war">
+        <exclude name="closure-library-20120710-r2029/**"/>
+      </fileset>
+      <fileset dir="war">
+        <include name="closure-library-20120710-r2029/closure/goog/css/dialog.css"/>
+      </fileset>
       <fileset dir="src/${appinventor.pkg}">
         <!-- canvas is a special case (see MockCanvas.java) -->
         <include name="images/canvas.png" />
@@ -312,6 +317,7 @@
         <pathelement location="${build.dir}/common/CommonUtils.jar" />
         <pathelement location="${build.dir}/common/CommonVersion.jar" />
         <pathelement location="${build.dir}/components/CommonConstants.jar" />
+        <pathelement location="${build.dir}/components/CommonConstants-gwt.jar" />
         <!-- external libs -->
         <pathelement location="${lib.dir}/guava/guava-14.0.1.jar" /> 
         <pathelement location="${lib.dir}/gwt_dragdrop/gwt-dnd-3.2.3.jar" />

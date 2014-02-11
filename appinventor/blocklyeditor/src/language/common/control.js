@@ -534,7 +534,7 @@ Blockly.Language.controls_nothing = {
   init: function() {
     this.setColour(Blockly.CONTROL_CATEGORY_HUE);
     this.appendDummyInput()
-        .appendTitle("nothing");
+        .appendTitle(Blockly.LANG_CONTROLS_NOTHING_TITLE);
     this.setOutput(true, null);
     Blockly.Language.setTooltip(this, Blockly.LANG_CONTROLS_NOTHING_TOOLTIP);
     this.appendCollapsedInput().appendTitle('nothing', 'COLLAPSED_TEXT');

@@ -493,7 +493,7 @@ Blockly.Language.procedures_mutatorcontainer = {
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE);
     this.appendStatementInput('STACK');
-    this.setTooltip('');
+    this.setTooltip(Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TOOLTIP);
     this.contextMenu = false;
   },
   // [lyn. 11/24/12] Set procBlock associated with this container.
@@ -536,7 +536,7 @@ Blockly.Language.procedures_mutatorarg = {
         .appendTitle(new Blockly.FieldTextInput('x',Blockly.LexicalVariable.renameParam), 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('');
+    this.setTooltip(Blockly.LANG_PROCEDURES_MUTATORARG_TOOLTIP);
     this.contextMenu = false;
   },
   // [lyn, 11/24/12] Return the container this mutator arg is in, or null if it's not in one.
@@ -722,7 +722,7 @@ Blockly.Language.procedures_callnoreturn = {
     this.procDropDown = new Blockly.FieldDropdown(this.procNamesFxn,Blockly.FieldProcedure.onChange);
     this.procDropDown.block = this;
     this.appendDummyInput()
-        .appendTitle("call ")
+        .appendTitle(Blockly.LANG_PROCEDURES_CALLNORETURN_CALL)
         .appendTitle(this.procDropDown,"PROCNAME");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -921,7 +921,7 @@ Blockly.Language.procedures_callreturn = {
     this.procDropDown = new Blockly.FieldDropdown(this.procNamesFxn,Blockly.FieldProcedure.onChange);
     this.procDropDown.block = this;
     this.appendDummyInput()
-        .appendTitle("call ")
+        .appendTitle(Blockly.LANG_PROCEDURES_CALLRETURN_CALL)
         .appendTitle(this.procDropDown,"PROCNAME");
     this.setOutput(true, null);
     this.setTooltip(Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP);

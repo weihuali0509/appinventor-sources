@@ -10,6 +10,27 @@
 
 goog.require('Blockly.TypeBlock');
 
+if (!Blockly.TranslationProperties) {
+  Blockly.TranslationProperties = {};
+  Blockly.TranslationProperties.map = {};
+}
+
+if (!Blockly.TranslationEvents) {
+  Blockly.TranslationEvents = {};
+  Blockly.TranslationEvents.map = {};
+}
+
+if (!Blockly.TranslationMethods) {
+  Blockly.TranslationMethods = {};
+  Blockly.TranslationMethods.map = {};
+}
+
+if (!Blockly.TranslationParams) {
+  Blockly.TranslationParams = {};
+  Blockly.TranslationParams.map = {};
+}
+
+
 if (!Blockly.Component) {
   Blockly.Component = {};
 }

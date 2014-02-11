@@ -497,7 +497,7 @@ Blockly.Language.local_mutatorcontainer = {
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_VARIABLES_LOCAL_MUTATOR_CONTAINER_TITLE_LOCAL_NAMES);
     this.appendStatementInput('STACK');
-    this.setTooltip('');
+    this.setTooltip(Blockly.LANG_VARIABLES_LOCAL_MUTATOR_CONTAINER_TOOLTIP);
     this.contextMenu = false;
   },
   // [lyn. 11/24/12] Set procBlock associated with this container.

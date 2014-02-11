@@ -22,6 +22,8 @@ goog.require('goog.ui.ac.AutoComplete');
 goog.require('goog.ui.ac.InputHandler');
 goog.require('goog.ui.ac.Renderer');
 
+if (!Blockly.TypeBlock) Blockly.TypeBlock = {};
+
 /**
  * Main Type Block function for configuration.
  * @param {Object} htmlConfig an object of the type:
