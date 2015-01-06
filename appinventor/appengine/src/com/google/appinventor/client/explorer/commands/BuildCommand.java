@@ -26,6 +26,10 @@ import java.util.Date;
 public class BuildCommand extends ChainableCommand {
   // The build target
   private String target;
+  
+  // The expiration date for this package
+  // Human time (GMT): Sun, 01 Mar 2015 23:59:59 GMT
+  private static final long expiration = 1425254399000L;
 
   /**
    * Creates a new build command.
@@ -58,6 +62,13 @@ public class BuildCommand extends ChainableCommand {
     final Ode ode = Ode.getInstance();
     final MessagesOutput messagesOutput = MessagesOutput.getMessagesOutput();
     messagesOutput.clear();
+    
+    // Expiration Check
+    if (System.currentTimeMillis() > expiration) {
+    	ErrorReporter.reportInfo(MESSAGES.BuildExpiration());
+    	return;
+    }
+ 
     messagesOutput.addMessages(MESSAGES.buildRequestedMessage(node.getName(),
         DateTimeFormat.getMediumDateTimeFormat().format(new Date())));
 

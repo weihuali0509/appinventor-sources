@@ -5227,5 +5227,8 @@ public interface OdeMessages extends Messages {
   @DefaultMessage("MaximumRangeMethods")
   @Description("")
   String MaximumRangeMethods();
-
+  
+  @DefaultMessage("This version of App Inventor is expired. You must get an updated version before you can build the app. Please backup/export your projects.")
+  @Description("")
+  String BuildExpiration();
 }
