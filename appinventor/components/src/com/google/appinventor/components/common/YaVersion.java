@@ -582,7 +582,6 @@ public class YaVersion {
   // - The Screen1.AppName was added and no block need to be changed.
   // For FORM_COMPONENT_VERSION 15:
   // - TitleVisible property was added
-
   public static final int FORM_COMPONENT_VERSION = 15;
 
   // For FUSIONTABLESCONTROL_COMPONENT_VERSION 2:

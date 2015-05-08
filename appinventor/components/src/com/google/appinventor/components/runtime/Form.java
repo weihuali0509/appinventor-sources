@@ -796,7 +796,7 @@ public class Form extends Activity
   public boolean TitleVisible() {
     return showTitle;
   }
-  
+
   /**
    * TitleVisible property setter method.
    *
@@ -813,8 +813,8 @@ public class Form extends Activity
           v.setVisibility(View.VISIBLE);
         } else {
           v.setVisibility(View.GONE);
-        }    
-        showTitle = show;		
+        }
+        showTitle = show;
       }
     }
   }
